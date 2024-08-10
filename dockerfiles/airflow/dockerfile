@@ -1,0 +1,11 @@
+FROM apache/airflow:2.9.2
+
+COPY dockerfiles/airflow/requirements.txt .
+
+RUN python3 -m pip install --upgrade pip \
+&& pip install -r requirements.txt
+
+COPY ./environment.env .
+RUN export $(grep -v '^#' my_custom.env | xargs)
+
+USER airflow

@@ -80,4 +80,6 @@ COPY dockerfiles/spark/entrypoint.sh .
 RUN chmod +x ${SPARK_HOME}/entrypoint.sh
 USER me
 
+COPY dockerfiles/spark/requirements.txt .
+RUN pip install -r requirements.txt
 ENTRYPOINT ["./entrypoint.sh"]
