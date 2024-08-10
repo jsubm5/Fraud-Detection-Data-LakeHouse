@@ -24,11 +24,11 @@ get_batch_query=render_sql_template(
     **batch_args
     )
 
-load_args={
-    'batch_view_or_table_name'              :       'fraud_view',
-    'destination_name'                      :       'nessie.silver_fraud_transactions',
-    'months_lookup_table'                   :       'nessie.months_lookup'
-    }
+load_args = {
+    'batch_view_or_table_name': 'fraud_view',
+    'bronz_transactions_table_name': 'nessie.bronz_raw_transactions',
+    'destination_name': 'nessie.silver_fraud_transactions'
+}
 
 load_query=render_sql_template(
     template_file='transform_to_silver_fraud.sql', 
@@ -58,5 +58,6 @@ try:
     
 except Exception as e:
     logger.error(f"An error occurred: {e}")
+    raise
 finally:
     spark.stop()
