@@ -1,7 +1,8 @@
 version: '3.7'
 
 networks:
-  solution-network:
+  BigData:
+    name: BigData-network
     driver: bridge
 
 services:
@@ -11,23 +12,22 @@ services:
     container_name: spark
     volumes:
       - ./includes:/includes
-      - ./scripts-variables.env:/scripts-variables.env
+      - ./jinja_templates:/jinja_templates
+      - ./environment.env:/environment.env
     ports:
       - 8888:8888
       - 8080:8080
       - 10000:10000
       - 10001:10001
+      - 2222:22
     environment:
       - AWS_ACCESS_KEY_ID=admin
       - AWS_SECRET_ACCESS_KEY=password
       - AWS_REGION=us-east-1
-      - AWS_REGION=us-east-1
-      - MINIO_REGION=us-east-1
       - AWS_DEFAULT_REGION=us-east-1
     networks:
-      - solution-network
+      - BigData
     
-# source: https://github.com/developer-advocacy-dremio/iceberg-intro-lessons/blob/main/docker-compose.yml
   nessie:
     image: projectnessie/nessie:0.67.0
     container_name: nessie
@@ -38,7 +38,7 @@ services:
       - AWS_SECRET_ACCESS_KEY=password
       - AWS_REGION=us-east-1
     networks:
-      - solution-network
+      - BigData
 
   minio:
     image: minio/minio:RELEASE.2023-07-21T21-12-44Z
@@ -55,7 +55,22 @@ services:
       - AWS_REGION=us-east-1
     command: ["server", "/data", "--console-address", ":9001"]
     networks:
-      - solution-network
+      - BigData
+
+  mc:
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      until (/usr/bin/mc config host add minio http://minio:9000 admin password) do echo '...waiting...' && sleep 1; done;
+      /usr/bin/mc rm -r --force minio/warehouse;
+      /usr/bin/mc mb minio/warehouse;
+      /usr/bin/mc policy set public minio/warehouse;
+      tail -f /dev/null
+      "      
+    networks:
+      - BigData
 
   dremio:
     platform: linux/x86_64
@@ -66,9 +81,8 @@ services:
       - 31010:31010
       - 32010:32010
     networks:
-      - solution-network
+      - BigData
 
-# Kafka compose source: https://medium.com/@erkndmrl/kafka-cluster-with-docker-compose-5864d50f677e
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:
@@ -77,7 +91,8 @@ services:
     ports:
       - 2181:2181
     networks:
-      - solution-network
+      - BigData
+
   kafka:
     image: confluentinc/cp-kafka:latest
     container_name: kafka
@@ -94,4 +109,4 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
-      - solution-network
+      - BigData
