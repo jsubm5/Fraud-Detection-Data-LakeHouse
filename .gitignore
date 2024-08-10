@@ -7,3 +7,6 @@ env
 *.jar
 test
 .env
+logs
+db
+environment.env
