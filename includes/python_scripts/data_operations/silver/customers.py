@@ -54,5 +54,6 @@ try:
     
 except Exception as e:
     logger.error(f"An error occurred: {e}")
+    raise 
 finally:
     spark.stop()

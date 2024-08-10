@@ -79,5 +79,6 @@ try:
     logger.info("Data cleaning and writing to Silver layer completed successfully.")
 except Exception as e:
     logger.error(f"An error occurred: {e}")
+    raise
 finally:
     spark.stop()
