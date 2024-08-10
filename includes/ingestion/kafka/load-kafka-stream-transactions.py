@@ -16,7 +16,12 @@ sys.path.insert(1, '/')
 from pyspark.sql.functions import from_json, col, to_timestamp
 from includes.modules.SparkIcebergNessieMinIO import spark_setup
 
-with open('/includes/python_scripts/kafka/tansactions-stream-sample.json', 'r') as f:
+import dotenv, os
+dotenv.load_dotenv('/environment.env')
+TRANSACTIONS_KAFKA_TOPIC        =os.getenv('TRANSACTIONS_KAFKA_TOPIC')
+
+
+with open('/includes/ingestion/kafka/tansactions-stream-sample.json', 'r') as f:
     sample_json = f.read()
 
 spark = spark_setup.init_spark_session(app_name="KafkaTransactionConsumer")

@@ -11,38 +11,38 @@ from includes.modules.Data_cleaner.Strategies import (
     FilterNegativeValuesStrategy
 )
 from includes.modules.Data_cleaner.Interface import CleaningPipeline
+from includes.python_scripts.data_operations.helpers.jinja_templates_helper import render_sql_template
+
+
+# preparing jinja arguements
+batch_args={
+    'destination_name'                      :       'nessie.bronz_raw_transactions',
+    'destination_ingestion_timestamp'       :       'ingestion_date',
+    'source_name'                           :       'nessie.bronz_raw_transactions',
+    'source_ingestion_timestamp'            :       'ingestion_date'
+    }
+
+get_batch_query=render_sql_template(
+    template_file='get_incremental_load_batch.sql', 
+    **batch_args
+    )
+
+load_args={
+    'destination_name'                      :       'nessie.bronz_raw_transactions',
+    'batch_view_or_table_name'              :       'nessie.months_lookup'
+    }
+
+load_query=render_sql_template(
+    template_file='transform_to_silver_transactions.sql',
+    **load_args
+    )
+
 
 spark = init_spark_session(app_name="clean bronz transactions")
 sc = spark.sparkContext
 sc.setLogLevel("WARN")
 try:
-    batch = spark.sql("""
-        WITH max_silver_date AS (
-            SELECT 
-                COALESCE(MAX(transaction_date), DATE '1970-01-01') AS max_date 
-            FROM 
-                nessie.silver_transactions
-        ),
-        batch_raw_trans AS (
-            SELECT 
-                *
-            FROM 
-                nessie.bronz_raw_transactions AS b
-            WHERE 
-                CAST(b.transaction_datetime AS DATE) > (SELECT max_date FROM max_silver_date)
-        )
-        SELECT 
-            b.*
-        FROM 
-            batch_raw_trans AS b
-        LEFT JOIN 
-            nessie.silver_transactions AS s
-        ON 
-            b.transaction_id = s.transaction_id
-            AND s.transaction_date >= (SELECT max_date FROM max_silver_date)
-        WHERE 
-            s.transaction_id IS NULL;
-    """)
+    batch = spark.sql(get_batch_query)
     
     batch.show()
 
@@ -74,29 +74,7 @@ try:
     cleaned_batch = cleaner.run()
     cleaned_batch.createOrReplaceTempView('transactions_temp_view')
 
-    spark.sql("""
-    INSERT INTO nessie.silver_transactions
-    SELECT 
-        transaction_id,
-        sender_id,
-        receiver_id,
-        transaction_amount,
-        transaction_currency,
-        transaction_datetime,
-        CAST(transaction_datetime AS DATE) AS transaction_date,
-        m.month_name AS transaction_month,
-        DATE_FORMAT(transaction_datetime, 'HH:mm:ss') AS transaction_time,
-        HOUR(transaction_datetime) AS transaction_hour,
-        transaction_type,
-        transaction_location,
-        device_id
-    FROM
-        transactions_temp_view v
-    LEFT JOIN
-        nessie.months_lookup as m
-    ON 
-        m.id = MONTH(v.transaction_datetime)
-    """)
+    spark.sql(load_query)
 
     logger.info("Data cleaning and writing to Silver layer completed successfully.")
 except Exception as e:

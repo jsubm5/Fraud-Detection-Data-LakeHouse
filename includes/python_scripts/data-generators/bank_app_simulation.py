@@ -53,7 +53,7 @@ class Firm(Thing):
         self.branches = [{'country': fake.country(), 'city': fake.city()} for _ in range(number_of_branches)]
         self.customers = [Customer() for _ in range(number_of_customers)]
 
-    def _get_customers_data(self):
+    def __get_customers_data(self):
         return [c.get_attributes_dict() for c in self.customers]
     
 class Transaction(Thing):
@@ -73,28 +73,28 @@ class BankAppSimulation(Firm):
     def __init__(self, number_of_branches, number_of_customers):
         super().__init__(number_of_branches, number_of_customers)
         self.app_transactions_data = []
-        self.customers_data = self._get_customers_data()
+        self.customers_data = self.__get_customers_data()
         self.fraud_transactions_data=[]
 
-    def simulate(self, fraud_probability:float=0.2, incomming_customers_probability=0.1):
+    def simulate(self, fraud_probability:float=0.2, incomming_customers_probability:float=0.1):
         if random() < fraud_probability:
-            self._add_random_fraud_flag()
+            self.__add_random_fraud_flag()
         
         if random() < incomming_customers_probability:
-            self._add_customer()
+            self.__add_customer()
             
         new_transactions= []
         new_transactions.extend([
-            self._do_transaction().get_attributes_dict() for _ in range(randint(1, 3))
+            self.__do_transaction().get_attributes_dict() for _ in range(randint(1, 3))
         ])
-        self.app_transactions_data = new_transactions
+        self.app_transactions_data.extend(new_transactions)
         
         return (new_transactions)
     
-    def _add_customer(self):
+    def __add_customer(self):
         self.customers.append(Customer())
         
-    def _add_random_fraud_flag(self)->dict:
+    def __add_random_fraud_flag(self)->dict:
         if len(self.app_transactions_data) <= 1:
             return 
         
@@ -111,13 +111,14 @@ class BankAppSimulation(Firm):
         self.fraud_transactions_data.append(fraud_transaction)
         return fraud_transaction
 
-    def _do_transaction(self) -> Transaction:
-        scenario = self._do_transaction_scenario()
+    def __do_transaction(self) -> Transaction:
+        scenario = self.__do_transaction_scenario()
         amount = scenario['amount']
             
         while True:
-                sender = self._extract_scenario_characters(scenario, 'from')
-                receiver = self._extract_scenario_characters(scenario, 'to')            
+            # ensuring that sender id != receiver id
+                sender = self.__extract_scenario_characters(scenario, 'from')
+                receiver = self.__extract_scenario_characters(scenario, 'to')            
                 if sender.is_customer() and receiver.is_customer():
                     if sender.customer_id != receiver.customer_id:
                         break
@@ -142,14 +143,14 @@ class BankAppSimulation(Firm):
             
         return transaction
     
-    def _do_transaction_scenario(self) -> dict[str, str]:
+    def __do_transaction_scenario(self) -> dict[str, str]:
         return choice([
             {'from': 'customer'         , 'to': 'customer'          , 'amount': randint(1, 100)},
             {'from': 'customer'         , 'to': 'non_customer'      , 'amount': randint(1, 100)},
             {'from': 'non_customer'     , 'to': 'customer'          , 'amount': randint(1, 100)},
         ])
         
-    def _extract_scenario_characters(self, scenario:dict[str, str], role:str) -> Person:
+    def __extract_scenario_characters(self, scenario:dict[str, str], role:str) -> Person:
         if scenario[role] == 'customer':
             return choice(self.customers)
         elif scenario[role] == 'non_customer':

@@ -12,7 +12,7 @@ sys.path.insert(1, '/includes')
 from includes.modules.SparkIcebergNessieMinIO import CustomSparkConfig
 
 import dotenv
-dotenv.load_dotenv('/scripts-variables.env')
+dotenv.load_dotenv('/environment.env')
 NESSIE_URI          = os.getenv('NESSIE_URI')
 MINIO_ACCESS_KEY    = os.getenv('MINIO_ACCESS_KEY')
 MINIO_SECRET_KEY    = os.getenv('MINIO_SECRET_KEY')

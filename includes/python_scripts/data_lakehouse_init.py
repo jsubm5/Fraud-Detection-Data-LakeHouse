@@ -1,29 +1,30 @@
 import sys
 sys.path.insert(1, '/')
-import glob
-import logging
+
+from includes.modules.file_utils.dir_handler import DirHandler
+from includes.modules.file_utils.file_handler import FileHandler
 from includes.modules.SparkIcebergNessieMinIO.spark_setup import init_spark_session
 
-def read_sql_file(file_path:str)->str:
-    with open(file_path, 'r') as file:
-        return file.read().strip()
+import os, dotenv
+dotenv.load_dotenv('/environment.env')
+
+LOOKUP_SQL_PATH     =os.getenv('LOOKUP_SQL_PATH')
+BRONZ_SQL_PATH      =os.getenv('BRONZ_SQL_PATH')
+SILVER_SQL_PATH     =os.getenv('SILVER_SQL_PATH')
+CREATE_PATTERN      =os.getenv('CREATE_PATTERN')
+
+init_sql_dir_paths = [BRONZ_SQL_PATH, SILVER_SQL_PATH, LOOKUP_SQL_PATH]
+
+sql_paths = DirHandler(path=init_sql_dir_paths)\
+    .get_files_with_pattern(CREATE_PATTERN)
+    
+sql_content = FileHandler(path=sql_paths)\
+    .read_files()
     
 spark = init_spark_session(app_name="DLH tables init")
 
-# SQL FILES WILL BE EXCUTED BY ORDER
-# every file contains ONLY one sql query
-sql_files_dir = [ 
-    '/includes/SQL-scripts/raw_bronz/init-*.sql',
-    '/includes/SQL-scripts/lookup-tables/init-*.sql',
-    '/includes/SQL-scripts/silver/init-*.sql',
-]
-
-sql_files_paths= [file for path in sql_files_dir for file in glob.glob(path)]
-
-for path in sql_files_paths:
-    sql_file_content = read_sql_file(path).split(';')
-    logging.info(f'Query path: {path}')
-    for query in sql_file_content:
+for content in sql_content:
+    print(f'\n\n{content}\n\n')
+    for query in content.split(';'):
         if query.strip():
             spark.sql(query)
-            logging.info('Done')
