@@ -28,4 +28,4 @@ FROM
     {{ batch_view_or_table_name }} AS brnz
 LEFT JOIN
     {{ months_lookup_table }} AS mnths
-ON MONTH(r.registration_datetime) = mnths.id 
+ON MONTH(brnz.registration_datetime) = mnths.id 
