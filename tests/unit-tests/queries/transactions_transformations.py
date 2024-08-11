@@ -10,34 +10,45 @@ class FrauldIncrementLoad(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.spark = init_spark_session('jinja unit test')
+        cls.spark.sql('DROP BRANCH IF EXISTS testing IN nessie')
         cls.spark.sql('CREATE BRANCH IF NOT EXISTS testing IN nessie FROM main')
         cls.spark.sql('USE REFERENCE testing IN nessie')
 
         # Truncate the tables to start with an empty destination
-        cls.spark.sql('TRUNCATE TABLE nessie.bronz_raw_customers')
-        cls.spark.sql('TRUNCATE TABLE nessie.silver_customers')
+        # cls.spark.sql('TRUNCATE TABLE nessie.bronz_raw_transactions')
+        # cls.spark.sql('TRUNCATE TABLE nessie.silver_transactions')
 
         print('TABLES')
         cls.spark.sql("SHOW TABLES IN nessie").show()
         # Insert initial data into bronz_raw_fraud_tranactions
         cls.spark.sql("""
-        INSERT INTO nessie.bronz_raw_customers (
-            first_name, 
-            last_name, 
-            phone_number, 
-            email, 
-            c_address, 
-            birth_date, 
-            customer_id, 
-            registration_datetime, 
-            ingested_at
-        ) VALUES 
-            ('John', 'Doe', '555-1234', 'john.doe@example.com', '456 Maple St, Springfield, IL', DATE '1990-01-15', 'cust_001', TIMESTAMP '2024-08-10 09:00:00',   TIMESTAMP '2024-08-10 09:05:00'),
-            ('Jane', 'Smith', '555-5678', 'jane.smith@example.com', '789 Oak St, Springfield, IL', DATE '1992-07-22', 'cust_002', TIMESTAMP '2024-08-11 10:00:00', TIMESTAMP '2024-08-10 10:05:00')
+        INSERT INTO nessie.bronz_raw_transactions
+        VALUES (
+            'txn001', 
+            'sender001', 
+            'receiver001', 
+            250.00, 
+            'USD', 
+            TIMESTAMP '2024-08-11 10:15:30', 
+            'transfer', 
+            'New York', 
+            'device001'
+        ), 
+        (
+            'txn002', 
+            'sender002', 
+            'receiver002', 
+            500.50, 
+            'EUR', 
+            TIMESTAMP '2024-08-11 14:45:00', 
+            'payment', 
+            'Berlin', 
+            'device002'
+        );
         """)
         #show tables
-        cls.spark.sql('SELECT * FROM nessie.bronz_raw_customers').show()
-        cls.spark.sql('SELECT * FROM nessie.silver_customers').show()
+        cls.spark.sql('SELECT * FROM nessie.bronz_raw_transactions').show()
+        cls.spark.sql('SELECT * FROM nessie.silver_transactions').show()
         cls.spark.sql('SELECT * FROM nessie.months_lookup').show()
 
     @classmethod
@@ -45,58 +56,60 @@ class FrauldIncrementLoad(unittest.TestCase):
         cls.spark.stop()
 
     def execute_incremental_load(self):
+        # transactions are loaded directly once kafka publish it
         batch_args={
-            'source_name'                           :       'nessie.bronz_raw_customers',
-            'source_ingestion_timestamp'            :       'ingested_at',
-            'destination_name'                      :       'nessie.silver_customers',
-            'destination_ingestion_timestamp'       :       'ingested_at'
+            'destination_name'                      :       'nessie.silver_transactions',
+            'destination_ingestion_timestamp'       :       'transaction_datetime',
+            'source_name'                           :       'nessie.bronz_raw_transactions',
+            'source_ingestion_timestamp'            :       'transaction_datetime'
             }
+
         get_batch_query=render_sql_template(
             template_file='get_incremental_load_batch.sql', 
             **batch_args
             )
         
-        self.spark.sql(get_batch_query).createOrReplaceTempView('customers_temp')
+        self.spark.sql(get_batch_query).createOrReplaceTempView('transactions_temp_view')
         
-        laod_args={
-            'destination_name'                      :       'nessie.silver_customers',
-            'batch_view_or_table_name'              :       'customers_temp',
-            'months_lookup_table'                   :       'nessie.months_lookup'
+        load_args={
+            'destination_name'                      :       'nessie.silver_transactions',
+            'batch_view_or_table_name'              :       'transactions_temp_view',
+            'months_lookup_table'                   :       'nessie.months_lookup',
             }
+
         load_query=render_sql_template(
-            template_file='transform_to_silver_customers.sql', 
-            **laod_args
+            template_file='transform_to_silver_transactions.sql',
+            **load_args
             )
 
         self.spark.sql(load_query)
         
-        return self.spark.sql('SELECT * FROM nessie.silver_customers')
+        return self.spark.sql('SELECT * FROM nessie.silver_transactions')
         
     def test_incremental_load_destination_is_empty(self):
         result = self.execute_incremental_load()
         res_cnt = result.count()
-        src_cnt = self.spark.sql("SELECT * FROM nessie.bronz_raw_customers").count()
+        src_cnt = self.spark.sql("SELECT * FROM nessie.bronz_raw_transactions").count()
         self.assertEqual(res_cnt, src_cnt, f"Expected {src_cnt} rows but got {res_cnt} rows in the result set.")
 
     def test_incremental_load_destination_not_empty(self):
         self.spark.sql("""
-        INSERT INTO nessie.bronz_raw_customers (
-            first_name, 
-            last_name, 
-            phone_number, 
-            email, 
-            c_address, 
-            birth_date, 
-            customer_id, 
-            registration_datetime, 
-            ingested_at
-        ) VALUES 
-            ('John', 'Doe', '555-1234', 'john.doe@example.com', '456 Maple St, Springfield, IL', DATE '1990-01-15', 'cust_001', TIMESTAMP '2024-08-10 09:00:00',   TIMESTAMP '2024-08-11 09:05:00'),
-            ('Jane', 'Smith', '555-5678', 'jane.smith@example.com', '789 Oak St, Springfield, IL', DATE '1992-07-22', 'cust_002', TIMESTAMP '2024-08-11 10:00:00', TIMESTAMP '2024-08-11 10:05:00')
+        INSERT INTO nessie.bronz_raw_transactions
+        VALUES (
+            'txn001', 
+            'sender001', 
+            'receiver001', 
+            250.00, 
+            'USD', 
+            TIMESTAMP '2024-08-11 20:15:30', 
+            'transfer', 
+            'New York', 
+            'device001'
+        )
         """)
         result = self.execute_incremental_load()
         res_cnt = result.count()
-        src_cnt = self.spark.sql("SELECT * FROM nessie.bronz_raw_customers").count()
+        src_cnt = self.spark.sql("SELECT * FROM nessie.bronz_raw_transactions").count()
         self.assertEqual(res_cnt, src_cnt, f"Expected {src_cnt} rows but got {res_cnt} rows in the result set.")
 
 if __name__ == '__main__':
