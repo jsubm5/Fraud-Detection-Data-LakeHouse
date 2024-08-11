@@ -16,11 +16,12 @@ from includes.python_scripts.data_operations.helpers.jinja_templates_helper impo
 
 # preparing jinja arguements
 batch_args={
-    'destination_name'                      :       'nessie.bronz_raw_transactions',
-    'destination_ingestion_timestamp'       :       'ingestion_date',
+    'destination_name'                      :       'nessie.silver_transactions',
+    'destination_ingestion_timestamp'       :       'transaction_datetime',
     'source_name'                           :       'nessie.bronz_raw_transactions',
-    'source_ingestion_timestamp'            :       'ingestion_date'
+    'source_ingestion_timestamp'            :       'transaction_datetime'
     }
+
 
 get_batch_query=render_sql_template(
     template_file='get_incremental_load_batch.sql', 
@@ -28,8 +29,9 @@ get_batch_query=render_sql_template(
     )
 
 load_args={
-    'destination_name'                      :       'nessie.bronz_raw_transactions',
-    'batch_view_or_table_name'              :       'nessie.months_lookup'
+    'destination_name'                      :       'nessie.silver_transactions',
+    'batch_view_or_table_name'              :       'transactions_temp_view',
+    'months_lookup_table'                   :       'nessie.months_lookup',
     }
 
 load_query=render_sql_template(
