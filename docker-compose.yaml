@@ -14,6 +14,7 @@ services:
       - ./includes:/includes
       - ./jinja_templates:/jinja_templates
       - ./environment.env:/environment.env
+      - ./tests:/tests
     ports:
       - 8888:8888
       - 8080:8080
