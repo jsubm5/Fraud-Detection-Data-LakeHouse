@@ -39,7 +39,8 @@ wait
 # Shut down Kafka and Zookeeper
 docker compose down \
   zookeeper \
-  kafka
+  kafka \
+  mc
 
 # # start dremio
 docker compose up -d \
