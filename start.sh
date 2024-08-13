@@ -27,7 +27,7 @@ docker compose up -d spark
 # add secrets to login shell
 # this allows executing S3 related spark-submit via SSH
 # step 1: load environment variables
-export $(grep -v '^#' ./environment.env | xargs)
+export $(grep -v '^\s*#.*' ./environment.env | xargs)
 # step 2: append 'export's in /etc/profile
 docker exec -u root spark /bin/bash -c "\
 echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY' >> /etc/profile && \
