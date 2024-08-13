@@ -28,3 +28,5 @@ LEFT JOIN
     {{ bronz_transactions_table_name }} AS brnz_tr
 ON
     brnz_tr.transaction_id = btch.transaction_id
+WHERE  
+    brnz_tr.sender_id IS NOT NULL
