@@ -69,14 +69,14 @@ def ETL_test_dag():
     ###################################
     #   TASK GROUP: GOLD VIEWS ..     #
     ###################################
-    @task_group(group_id='creating-gold-views')
-    def creating_gold_views():
-        ssh_dremio_task = CustomSSHSparkOperator(
-            task_id='views',
-            ssh_conn_id='my_ssh_connection',
-            application_path='/includes/python_scripts/data_operations/gold/gold_views.py',
-		)
-        ssh_dremio_task
+    # @task_group(group_id='creating-gold-views')
+    # def creating_gold_views():
+    #     ssh_dremio_task = CustomSSHSparkOperator(
+    #         task_id='views',
+    #         ssh_conn_id='my_ssh_connection',
+    #         application_path='/includes/python_scripts/data_operations/gold/gold_views.py',
+	# 	)
+    #     ssh_dremio_task
 
-    batch_ingestion_task_group() >> data_cleaning_and_enrichment() >> creating_gold_views()
+    batch_ingestion_task_group() >> data_cleaning_and_enrichment() #>> creating_gold_views()
 ETL_test_dag()
