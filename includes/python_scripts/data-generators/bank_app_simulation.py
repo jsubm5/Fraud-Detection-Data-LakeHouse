@@ -53,7 +53,7 @@ class Firm(Thing):
         self.branches = [{'country': fake.country(), 'city': fake.city()} for _ in range(number_of_branches)]
         self.customers = [Customer() for _ in range(number_of_customers)]
 
-    def __get_customers_data(self):
+    def _get_customers_data(self):
         return [c.get_attributes_dict() for c in self.customers]
     
 class Transaction(Thing):
@@ -73,7 +73,7 @@ class BankAppSimulation(Firm):
     def __init__(self, number_of_branches, number_of_customers):
         super().__init__(number_of_branches, number_of_customers)
         self.app_transactions_data = []
-        self.customers_data = self.__get_customers_data()
+        self.customers_data = self._get_customers_data()
         self.fraud_transactions_data=[]
 
     def simulate(self, fraud_probability:float=0.2, incomming_customers_probability:float=0.1):

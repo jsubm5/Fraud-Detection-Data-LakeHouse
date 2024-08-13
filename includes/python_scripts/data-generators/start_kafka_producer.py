@@ -1,7 +1,7 @@
 from confluent_kafka import Producer
 import json
 from bank_app_simulation import BankAppSimulation
-import dotenv, os
+import dotenv, os, time
 
 
 dotenv.load_dotenv('./environment.env')
@@ -33,7 +33,10 @@ def run_simulation_and_kafka_producer(sending_msgs_num:int=None)->None:
     TRANSACTIONS_KAFKA_TOPIC=os.getenv('TRANSACTIONS_KAFKA_TOPIC')
 
     while True:        
+        customer_len_buffer = len(bas.customers_data)
+        fraud_transaction_len_buffer = len(bas.fraud_transactions_data)
         new_transactions = bas.simulate()
+        
         for transaction in new_transactions:
             producer.produce(
                 TRANSACTIONS_KAFKA_TOPIC,
@@ -41,11 +44,16 @@ def run_simulation_and_kafka_producer(sending_msgs_num:int=None)->None:
                 value=json.dumps(transaction),
                 callback=delivery_report
             )
+        
         producer.flush()
+        time.sleep(30)
+        
         if c == sending_msgs_num:
             break
         if sending_msgs_num:
             c += 1
+        if (len(bas.customers_data) != customer_len_buffer) or  (len(bas.fraud_transactions_data) != fraud_transaction_len_buffer):
+            load_to_mongodb()
             
 
 def load_to_mongodb():
@@ -102,6 +110,6 @@ def load_to_mongodb():
         client.close()
     client.close()
 if __name__ == '__main__':
-    run_simulation_and_kafka_producer(100)
-    load_to_mongodb()
-    print(f"\n\ncustomers num: {len(bas.customers_data)}")
+    run_simulation_and_kafka_producer()
+    # load_to_mongodb()
+    # print(f"\n\ncustomers num: {len(bas.customers_data)}")
