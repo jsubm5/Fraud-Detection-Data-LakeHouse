@@ -8,7 +8,7 @@ class DremioAPI(APIClient):
         self.token = self.get_user_token()
 
     def get_user_token(self) -> str:
-        endpoint = f"{self.server}/apiv2/login"
+        endpoint = f"http://{self.server}/apiv2/login"
         headers = {"Content-Type": "application/json"}
         data = {"userName": self.username, "password": self.password}
         response = self.post(endpoint, headers, data)
@@ -24,7 +24,7 @@ class DremioAPI(APIClient):
         return response
 
     def create_space(self, name: str, description: str = "No description has been provided") -> None:
-        endpoint = f"{self.server}/api/v3/catalog"
+        endpoint = f"http://{self.server}/api/v3/catalog"
         headers = {
             "Authorization": f"Bearer {self.token}",
             "Content-Type": "application/json"
@@ -41,7 +41,7 @@ class DremioAPI(APIClient):
             print(f"Space '{name}' created successfully.")
 
     def create_view(self, name: str, path: str, query: str) -> None:
-        endpoint = f"{self.server}/api/v3/catalog"
+        endpoint = f"http://{self.server}/api/v3/catalog"
         headers = {
             "Authorization": f"Bearer {self.token}",
             "Content-Type": "application/json"
@@ -57,12 +57,3 @@ class DremioAPI(APIClient):
             raise ValueError(f"Error: Failed to create view. Response: {response.json()}")
         else:
             print(f"View '{name}' created successfully.")
-            
-            
-username="ahmadMu"
-password="passw0rd"
-dremioServer="http://localhost:9047"
-
-dremio=DremioAPI(
-    server=dremioServer, username=username, password=password
-)
