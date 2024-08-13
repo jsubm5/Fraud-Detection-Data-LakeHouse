@@ -38,7 +38,7 @@ schema = StructType([
                 ),
     
     # for CDC Applications
-    StructField(name='ingested_at', 
+    StructField(name='ingestion_date', 
                dataType=TimestampType()
                 ),
 ])

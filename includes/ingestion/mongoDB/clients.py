@@ -26,7 +26,8 @@ df = spark.createDataFrame(data=data,
 df = df.withColumn("date_of_birth", 
                    to_date(col("date_of_birth")))\
         .withColumn("registration_datetime", 
-                   to_timestamp(col("registration_datetime")))
+                   to_timestamp(col("registration_datetime")))\
+        .withColumn("ingestion_date", to_timestamp(col("ingestion_date")))\
 
 df.createTempView('Customers')
 
@@ -45,7 +46,7 @@ spark.sql(
         date_of_birth AS birth_date,
         customer_id AS customer_id,
         registration_datetime AS registration_datetime,
-        ingested_at AS ingested_at
+        ingestion_date AS ingested_at
     FROM
         Customers
     """
