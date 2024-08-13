@@ -76,9 +76,13 @@ echo 'me:changeme' | chpasswd && \
 echo 'me ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/me && \
 chown -R me:me /opt/spark
 
+# RUN echo "export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+#         export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+#         export AWS_REGION=$AWS_REGION \
+#         export AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" >> /etc/profile
+
 COPY dockerfiles/spark/entrypoint.sh .
 RUN chmod +x ${SPARK_HOME}/entrypoint.sh
-USER me
 
 COPY dockerfiles/spark/requirements.txt .
 RUN pip install -r requirements.txt
