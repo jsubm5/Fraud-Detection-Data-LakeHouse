@@ -24,7 +24,7 @@
 **Docker Compose:** A tool for defining and running multi-container Docker applications, simplifying the deployment and management of the project's entire stack.
 # Introduction
 
-This project is deployed using Docker Compose and consists of two networks: `airflow-network`, which contains Airflow-related containers, and `solution-network`, which contains the remaining containers.
+This project is deployed using Docker Compose and consists of two networks: `airflow-network`, which contains Airflow-related containers, and `BigData-network`, which contains the remaining containers.
 
 The `./includes` directory is mounted into the Spark cluster at `/`. The Spark cluster is triggered by Airflow using an **SSH** server. Check the `dockerfiles` directory for more details.
 
