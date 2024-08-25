@@ -93,8 +93,7 @@ services:
   airflow-webserver:
     <<: *airflow-common
     command: webserver
-    container_name:   zookeeper \
-  kafka
+    container_name:   airflow-webserver
     ports:
       - "8082:8080"
     healthcheck:

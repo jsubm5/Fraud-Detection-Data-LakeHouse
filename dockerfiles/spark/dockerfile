@@ -27,12 +27,21 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Optional env variables
+
 ENV SPARK_HOME=${SPARK_HOME:-"/opt/spark"}
+RUN echo "SPARK_HOME is: $SPARK_HOME"
 ENV PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.9.7-src.zip:$PYTHONPATH
+RUN echo "PYTHONPATH is: $PYTHONPATH"
+
+# # Check if SPARK_HOME path exists
+# RUN if [ ! -d "$SPARK_HOME" ]; then \
+#     echo "SPARK_HOME path ($SPARK_HOME) does not exist." \
+# fi
+
 
 WORKDIR ${SPARK_HOME}
 
-ENV SPARK_VERSION=3.5.1
+ENV SPARK_VERSION=3.5.2
 ENV SPARK_MAJOR_VERSION=3.5
 ENV ICEBERG_VERSION=1.5.2
 
@@ -42,10 +51,12 @@ RUN mkdir -p ${SPARK_HOME} \
  && tar xvzf spark-${SPARK_VERSION}-bin-hadoop3.tgz --directory /opt/spark --strip-components 1 \
  && rm -rf spark-${SPARK_VERSION}-bin-hadoop3.tgz
 
+ #echo "i here"
+
 # Download iceberg spark runtime and AWS bundle
 RUN curl https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-${SPARK_MAJOR_VERSION}_2.12/${ICEBERG_VERSION}/iceberg-spark-runtime-${SPARK_MAJOR_VERSION}_2.12-${ICEBERG_VERSION}.jar -Lo /opt/spark/jars/iceberg-spark-runtime-${SPARK_MAJOR_VERSION}_2.12-${ICEBERG_VERSION}.jar
 RUN curl -s https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-aws-bundle/${ICEBERG_VERSION}/iceberg-aws-bundle-${ICEBERG_VERSION}.jar -Lo /opt/spark/jars/iceberg-aws-bundle-${ICEBERG_VERSION}.jar
-
+ #echo "i here2"
 # Download spark kafka runtime and kafka sql
 RUN curl -o ${SPARK_HOME}/jars/spark-sql-kafka-0-10_2.12-3.3.0.jar https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.3.0/spark-sql-kafka-0-10_2.12-3.3.0.jar
 RUN curl -o ${SPARK_HOME}/jars/spark-token-provider-kafka-0-10_2.12-3.3.0.jar https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.3.0/spark-token-provider-kafka-0-10_2.12-3.3.0.jar

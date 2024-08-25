@@ -110,6 +110,6 @@ def load_to_mongodb():
         client.close()
     client.close()
 if __name__ == '__main__':
-    run_simulation_and_kafka_producer()
+    run_simulation_and_kafka_producer(10)
     # load_to_mongodb()
     # print(f"\n\ncustomers num: {len(bas.customers_data)}")
