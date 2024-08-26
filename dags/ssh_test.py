@@ -1,4 +1,4 @@
-from airflow import DAG
+from airflow import DAG # type: ignore
 from operators.ssh_spark import CustomSSHSparkOperator
 from airflow.utils.dates import days_ago
 from airflow.decorators import task, dag

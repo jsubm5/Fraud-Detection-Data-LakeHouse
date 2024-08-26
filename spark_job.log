@@ -1,119 +1,120 @@
-24/08/25 18:47:09 INFO SparkContext: Running Spark version 3.5.2
-24/08/25 18:47:09 INFO SparkContext: OS info Linux, 6.8.0-40-generic, amd64
-24/08/25 18:47:09 INFO SparkContext: Java version 11.0.24
-24/08/25 18:47:10 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-24/08/25 18:47:10 INFO ResourceUtils: ==============================================================
-24/08/25 18:47:10 INFO ResourceUtils: No custom resources configured for spark.driver.
-24/08/25 18:47:10 INFO ResourceUtils: ==============================================================
-24/08/25 18:47:10 INFO SparkContext: Submitted application: KafkaTransactionConsumer
-24/08/25 18:47:10 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
-24/08/25 18:47:10 INFO ResourceProfile: Limiting resource is cpu
-24/08/25 18:47:10 INFO ResourceProfileManager: Added ResourceProfile id: 0
-24/08/25 18:47:11 INFO SecurityManager: Changing view acls to: root
-24/08/25 18:47:11 INFO SecurityManager: Changing modify acls to: root
-24/08/25 18:47:11 INFO SecurityManager: Changing view acls groups to: 
-24/08/25 18:47:11 INFO SecurityManager: Changing modify acls groups to: 
-24/08/25 18:47:11 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: root; groups with view permissions: EMPTY; users with modify permissions: root; groups with modify permissions: EMPTY
-24/08/25 18:47:12 INFO Utils: Successfully started service 'sparkDriver' on port 43385.
-24/08/25 18:47:12 INFO SparkEnv: Registering MapOutputTracker
-24/08/25 18:47:13 INFO SparkEnv: Registering BlockManagerMaster
-24/08/25 18:47:13 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
-24/08/25 18:47:13 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
-24/08/25 18:47:13 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
-24/08/25 18:47:13 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-45a57acc-9d65-4f89-a72e-c44cabbb8686
-24/08/25 18:47:13 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
-24/08/25 18:47:13 INFO SparkEnv: Registering OutputCommitCoordinator
-24/08/25 18:47:14 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
-24/08/25 18:47:14 INFO Utils: Successfully started service 'SparkUI' on port 4040.
-24/08/25 18:47:14 INFO Executor: Starting executor ID driver on host 4e8655b07bf1
-24/08/25 18:47:14 INFO Executor: OS info Linux, 6.8.0-40-generic, amd64
-24/08/25 18:47:14 INFO Executor: Java version 11.0.24
-24/08/25 18:47:14 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
-24/08/25 18:47:14 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@289f8826 for default.
-24/08/25 18:47:14 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 45925.
-24/08/25 18:47:14 INFO NettyBlockTransferService: Server created on 4e8655b07bf1:45925
-24/08/25 18:47:14 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
-24/08/25 18:47:15 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 4e8655b07bf1, 45925, None)
-24/08/25 18:47:15 INFO BlockManagerMasterEndpoint: Registering block manager 4e8655b07bf1:45925 with 434.4 MiB RAM, BlockManagerId(driver, 4e8655b07bf1, 45925, None)
-24/08/25 18:47:15 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 4e8655b07bf1, 45925, None)
-24/08/25 18:47:15 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 4e8655b07bf1, 45925, None)
-24/08/25 18:47:17 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir.
-24/08/25 18:47:17 INFO SharedState: Warehouse path is 'file:/opt/spark/spark-warehouse'.
-24/08/25 18:47:34 INFO CodeGenerator: Code generated in 1259.47439 ms
-24/08/25 18:47:35 INFO SparkContext: Starting job: json at NativeMethodAccessorImpl.java:0
-24/08/25 18:47:35 INFO DAGScheduler: Got job 0 (json at NativeMethodAccessorImpl.java:0) with 8 output partitions
-24/08/25 18:47:35 INFO DAGScheduler: Final stage: ResultStage 0 (json at NativeMethodAccessorImpl.java:0)
-24/08/25 18:47:35 INFO DAGScheduler: Parents of final stage: List()
-24/08/25 18:47:35 INFO DAGScheduler: Missing parents: List()
-24/08/25 18:47:35 INFO DAGScheduler: Submitting ResultStage 0 (MapPartitionsRDD[6] at json at NativeMethodAccessorImpl.java:0), which has no missing parents
-24/08/25 18:47:36 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 21.1 KiB, free 434.4 MiB)
-24/08/25 18:47:36 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 10.2 KiB, free 434.4 MiB)
-24/08/25 18:47:36 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on 4e8655b07bf1:45925 (size: 10.2 KiB, free: 434.4 MiB)
-24/08/25 18:47:36 INFO SparkContext: Created broadcast 0 from broadcast at DAGScheduler.scala:1585
-24/08/25 18:47:36 INFO DAGScheduler: Submitting 8 missing tasks from ResultStage 0 (MapPartitionsRDD[6] at json at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7))
-24/08/25 18:47:36 INFO TaskSchedulerImpl: Adding task set 0.0 with 8 tasks resource profile 0
-24/08/25 18:47:36 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0) (4e8655b07bf1, executor driver, partition 0, PROCESS_LOCAL, 8979 bytes) 
-24/08/25 18:47:36 INFO TaskSetManager: Starting task 1.0 in stage 0.0 (TID 1) (4e8655b07bf1, executor driver, partition 1, PROCESS_LOCAL, 8979 bytes) 
-24/08/25 18:47:36 INFO TaskSetManager: Starting task 2.0 in stage 0.0 (TID 2) (4e8655b07bf1, executor driver, partition 2, PROCESS_LOCAL, 8979 bytes) 
-24/08/25 18:47:36 INFO TaskSetManager: Starting task 3.0 in stage 0.0 (TID 3) (4e8655b07bf1, executor driver, partition 3, PROCESS_LOCAL, 8979 bytes) 
-24/08/25 18:47:36 INFO TaskSetManager: Starting task 4.0 in stage 0.0 (TID 4) (4e8655b07bf1, executor driver, partition 4, PROCESS_LOCAL, 8979 bytes) 
-24/08/25 18:47:36 INFO TaskSetManager: Starting task 5.0 in stage 0.0 (TID 5) (4e8655b07bf1, executor driver, partition 5, PROCESS_LOCAL, 8979 bytes) 
-24/08/25 18:47:36 INFO TaskSetManager: Starting task 6.0 in stage 0.0 (TID 6) (4e8655b07bf1, executor driver, partition 6, PROCESS_LOCAL, 8979 bytes) 
-24/08/25 18:47:36 INFO TaskSetManager: Starting task 7.0 in stage 0.0 (TID 7) (4e8655b07bf1, executor driver, partition 7, PROCESS_LOCAL, 9452 bytes) 
-24/08/25 18:47:36 INFO Executor: Running task 0.0 in stage 0.0 (TID 0)
-24/08/25 18:47:36 INFO Executor: Running task 2.0 in stage 0.0 (TID 2)
-24/08/25 18:47:36 INFO Executor: Running task 5.0 in stage 0.0 (TID 5)
-24/08/25 18:47:36 INFO Executor: Running task 7.0 in stage 0.0 (TID 7)
-24/08/25 18:47:36 INFO Executor: Running task 4.0 in stage 0.0 (TID 4)
-24/08/25 18:47:36 INFO Executor: Running task 6.0 in stage 0.0 (TID 6)
-24/08/25 18:47:36 INFO Executor: Running task 3.0 in stage 0.0 (TID 3)
-24/08/25 18:47:36 INFO Executor: Running task 1.0 in stage 0.0 (TID 1)
-24/08/25 18:47:40 INFO CodeGenerator: Code generated in 397.404431 ms
-24/08/25 18:47:41 INFO PythonRunner: Times: total = 4120, boot = 2763, init = 1357, finish = 0
-24/08/25 18:47:41 INFO PythonRunner: Times: total = 4145, boot = 2835, init = 1309, finish = 1
-24/08/25 18:47:41 INFO PythonRunner: Times: total = 4198, boot = 2800, init = 1397, finish = 1
-24/08/25 18:47:41 INFO PythonRunner: Times: total = 4196, boot = 2716, init = 1480, finish = 0
-24/08/25 18:47:42 INFO PythonRunner: Times: total = 4318, boot = 2707, init = 1610, finish = 1
-24/08/25 18:47:42 INFO PythonRunner: Times: total = 4320, boot = 2909, init = 1411, finish = 0
-24/08/25 18:47:42 INFO Executor: Finished task 4.0 in stage 0.0 (TID 4). 1936 bytes result sent to driver
-24/08/25 18:47:42 INFO Executor: Finished task 3.0 in stage 0.0 (TID 3). 1936 bytes result sent to driver
-24/08/25 18:47:42 INFO Executor: Finished task 6.0 in stage 0.0 (TID 6). 1936 bytes result sent to driver
-24/08/25 18:47:42 INFO Executor: Finished task 0.0 in stage 0.0 (TID 0). 1936 bytes result sent to driver
-24/08/25 18:47:42 INFO Executor: Finished task 5.0 in stage 0.0 (TID 5). 1936 bytes result sent to driver
-24/08/25 18:47:42 INFO PythonRunner: Times: total = 4409, boot = 2868, init = 1541, finish = 0
-24/08/25 18:47:42 INFO Executor: Finished task 1.0 in stage 0.0 (TID 1). 1936 bytes result sent to driver
-24/08/25 18:47:42 INFO Executor: Finished task 2.0 in stage 0.0 (TID 2). 1936 bytes result sent to driver
-24/08/25 18:47:42 INFO TaskSetManager: Finished task 6.0 in stage 0.0 (TID 6) in 5549 ms on 4e8655b07bf1 (executor driver) (1/8)
-24/08/25 18:47:42 INFO TaskSetManager: Finished task 4.0 in stage 0.0 (TID 4) in 5571 ms on 4e8655b07bf1 (executor driver) (2/8)
-24/08/25 18:47:42 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 5673 ms on 4e8655b07bf1 (executor driver) (3/8)
-24/08/25 18:47:42 INFO TaskSetManager: Finished task 5.0 in stage 0.0 (TID 5) in 5570 ms on 4e8655b07bf1 (executor driver) (4/8)
-24/08/25 18:47:42 INFO TaskSetManager: Finished task 3.0 in stage 0.0 (TID 3) in 5583 ms on 4e8655b07bf1 (executor driver) (5/8)
-24/08/25 18:47:42 INFO TaskSetManager: Finished task 1.0 in stage 0.0 (TID 1) in 5600 ms on 4e8655b07bf1 (executor driver) (6/8)
-24/08/25 18:47:42 INFO TaskSetManager: Finished task 2.0 in stage 0.0 (TID 2) in 5599 ms on 4e8655b07bf1 (executor driver) (7/8)
-24/08/25 18:47:42 INFO PythonAccumulatorV2: Connected to AccumulatorServer at host: 127.0.0.1 port: 42683
-24/08/25 18:47:42 INFO PythonRunner: Times: total = 4439, boot = 2727, init = 1711, finish = 1
-24/08/25 18:47:42 INFO Executor: Finished task 7.0 in stage 0.0 (TID 7). 2716 bytes result sent to driver
-24/08/25 18:47:42 INFO TaskSetManager: Finished task 7.0 in stage 0.0 (TID 7) in 5634 ms on 4e8655b07bf1 (executor driver) (8/8)
-24/08/25 18:47:42 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool 
-24/08/25 18:47:42 INFO DAGScheduler: ResultStage 0 (json at NativeMethodAccessorImpl.java:0) finished in 6.665 s
-24/08/25 18:47:42 INFO DAGScheduler: Job 0 is finished. Cancelling potential speculative or zombie tasks for this job
-24/08/25 18:47:42 INFO TaskSchedulerImpl: Killing all running tasks in stage 0: Stage finished
-24/08/25 18:47:42 INFO DAGScheduler: Job 0 finished: json at NativeMethodAccessorImpl.java:0, took 6.945666 s
+24/08/25 20:52:06 INFO SparkContext: Running Spark version 3.5.2
+24/08/25 20:52:07 INFO SparkContext: OS info Linux, 6.8.0-40-generic, amd64
+24/08/25 20:52:07 INFO SparkContext: Java version 11.0.24
+24/08/25 20:52:07 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+24/08/25 20:52:07 INFO ResourceUtils: ==============================================================
+24/08/25 20:52:07 INFO ResourceUtils: No custom resources configured for spark.driver.
+24/08/25 20:52:07 INFO ResourceUtils: ==============================================================
+24/08/25 20:52:07 INFO SparkContext: Submitted application: KafkaTransactionConsumer
+24/08/25 20:52:07 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+24/08/25 20:52:07 INFO ResourceProfile: Limiting resource is cpu
+24/08/25 20:52:07 INFO ResourceProfileManager: Added ResourceProfile id: 0
+24/08/25 20:52:08 INFO SecurityManager: Changing view acls to: root
+24/08/25 20:52:08 INFO SecurityManager: Changing modify acls to: root
+24/08/25 20:52:08 INFO SecurityManager: Changing view acls groups to: 
+24/08/25 20:52:08 INFO SecurityManager: Changing modify acls groups to: 
+24/08/25 20:52:08 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: root; groups with view permissions: EMPTY; users with modify permissions: root; groups with modify permissions: EMPTY
+24/08/25 20:52:09 INFO Utils: Successfully started service 'sparkDriver' on port 46569.
+24/08/25 20:52:09 INFO SparkEnv: Registering MapOutputTracker
+24/08/25 20:52:09 INFO SparkEnv: Registering BlockManagerMaster
+24/08/25 20:52:09 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+24/08/25 20:52:09 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+24/08/25 20:52:09 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+24/08/25 20:52:09 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-22d4486f-70be-4154-a450-9ce77f058fde
+24/08/25 20:52:09 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+24/08/25 20:52:09 INFO SparkEnv: Registering OutputCommitCoordinator
+24/08/25 20:52:10 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+24/08/25 20:52:10 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+24/08/25 20:52:10 INFO Executor: Starting executor ID driver on host 8ef98fa209cc
+24/08/25 20:52:10 INFO Executor: OS info Linux, 6.8.0-40-generic, amd64
+24/08/25 20:52:10 INFO Executor: Java version 11.0.24
+24/08/25 20:52:10 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+24/08/25 20:52:10 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@371bf8a9 for default.
+24/08/25 20:52:10 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 34879.
+24/08/25 20:52:10 INFO NettyBlockTransferService: Server created on 8ef98fa209cc:34879
+24/08/25 20:52:10 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+24/08/25 20:52:10 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 8ef98fa209cc, 34879, None)
+24/08/25 20:52:10 INFO BlockManagerMasterEndpoint: Registering block manager 8ef98fa209cc:34879 with 434.4 MiB RAM, BlockManagerId(driver, 8ef98fa209cc, 34879, None)
+24/08/25 20:52:10 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 8ef98fa209cc, 34879, None)
+24/08/25 20:52:10 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 8ef98fa209cc, 34879, None)
+24/08/25 20:52:12 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir.
+24/08/25 20:52:12 INFO SharedState: Warehouse path is 'file:/opt/spark/spark-warehouse'.
+24/08/25 20:52:27 INFO CodeGenerator: Code generated in 875.914749 ms
+24/08/25 20:52:28 INFO SparkContext: Starting job: json at NativeMethodAccessorImpl.java:0
+24/08/25 20:52:28 INFO DAGScheduler: Got job 0 (json at NativeMethodAccessorImpl.java:0) with 8 output partitions
+24/08/25 20:52:28 INFO DAGScheduler: Final stage: ResultStage 0 (json at NativeMethodAccessorImpl.java:0)
+24/08/25 20:52:28 INFO DAGScheduler: Parents of final stage: List()
+24/08/25 20:52:28 INFO DAGScheduler: Missing parents: List()
+24/08/25 20:52:28 INFO DAGScheduler: Submitting ResultStage 0 (MapPartitionsRDD[6] at json at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/08/25 20:52:28 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 21.1 KiB, free 434.4 MiB)
+24/08/25 20:52:28 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 10.3 KiB, free 434.4 MiB)
+24/08/25 20:52:28 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on 8ef98fa209cc:34879 (size: 10.3 KiB, free: 434.4 MiB)
+24/08/25 20:52:28 INFO SparkContext: Created broadcast 0 from broadcast at DAGScheduler.scala:1585
+24/08/25 20:52:28 INFO DAGScheduler: Submitting 8 missing tasks from ResultStage 0 (MapPartitionsRDD[6] at json at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7))
+24/08/25 20:52:28 INFO TaskSchedulerImpl: Adding task set 0.0 with 8 tasks resource profile 0
+24/08/25 20:52:29 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0) (8ef98fa209cc, executor driver, partition 0, PROCESS_LOCAL, 8979 bytes) 
+24/08/25 20:52:29 INFO TaskSetManager: Starting task 1.0 in stage 0.0 (TID 1) (8ef98fa209cc, executor driver, partition 1, PROCESS_LOCAL, 8979 bytes) 
+24/08/25 20:52:29 INFO TaskSetManager: Starting task 2.0 in stage 0.0 (TID 2) (8ef98fa209cc, executor driver, partition 2, PROCESS_LOCAL, 8979 bytes) 
+24/08/25 20:52:29 INFO TaskSetManager: Starting task 3.0 in stage 0.0 (TID 3) (8ef98fa209cc, executor driver, partition 3, PROCESS_LOCAL, 8979 bytes) 
+24/08/25 20:52:29 INFO TaskSetManager: Starting task 4.0 in stage 0.0 (TID 4) (8ef98fa209cc, executor driver, partition 4, PROCESS_LOCAL, 8979 bytes) 
+24/08/25 20:52:29 INFO TaskSetManager: Starting task 5.0 in stage 0.0 (TID 5) (8ef98fa209cc, executor driver, partition 5, PROCESS_LOCAL, 8979 bytes) 
+24/08/25 20:52:29 INFO TaskSetManager: Starting task 6.0 in stage 0.0 (TID 6) (8ef98fa209cc, executor driver, partition 6, PROCESS_LOCAL, 8979 bytes) 
+24/08/25 20:52:29 INFO TaskSetManager: Starting task 7.0 in stage 0.0 (TID 7) (8ef98fa209cc, executor driver, partition 7, PROCESS_LOCAL, 9452 bytes) 
+24/08/25 20:52:29 INFO Executor: Running task 7.0 in stage 0.0 (TID 7)
+24/08/25 20:52:29 INFO Executor: Running task 3.0 in stage 0.0 (TID 3)
+24/08/25 20:52:29 INFO Executor: Running task 5.0 in stage 0.0 (TID 5)
+24/08/25 20:52:29 INFO Executor: Running task 2.0 in stage 0.0 (TID 2)
+24/08/25 20:52:29 INFO Executor: Running task 4.0 in stage 0.0 (TID 4)
+24/08/25 20:52:29 INFO Executor: Running task 6.0 in stage 0.0 (TID 6)
+24/08/25 20:52:29 INFO Executor: Running task 0.0 in stage 0.0 (TID 0)
+24/08/25 20:52:29 INFO Executor: Running task 1.0 in stage 0.0 (TID 1)
+24/08/25 20:52:32 INFO CodeGenerator: Code generated in 288.890982 ms
+24/08/25 20:52:33 INFO PythonRunner: Times: total = 3283, boot = 2344, init = 939, finish = 0
+24/08/25 20:52:33 INFO PythonRunner: Times: total = 3279, boot = 2334, init = 944, finish = 1
+24/08/25 20:52:33 INFO PythonRunner: Times: total = 3335, boot = 2366, init = 969, finish = 0
+24/08/25 20:52:33 INFO PythonRunner: Times: total = 3353, boot = 2433, init = 920, finish = 0
+24/08/25 20:52:33 INFO PythonRunner: Times: total = 3405, boot = 2473, init = 932, finish = 0
+24/08/25 20:52:33 INFO Executor: Finished task 2.0 in stage 0.0 (TID 2). 1936 bytes result sent to driver
+24/08/25 20:52:33 INFO Executor: Finished task 6.0 in stage 0.0 (TID 6). 1936 bytes result sent to driver
+24/08/25 20:52:33 INFO Executor: Finished task 3.0 in stage 0.0 (TID 3). 1936 bytes result sent to driver
+24/08/25 20:52:33 INFO PythonRunner: Times: total = 3481, boot = 2378, init = 1103, finish = 0
+24/08/25 20:52:33 INFO Executor: Finished task 4.0 in stage 0.0 (TID 4). 1936 bytes result sent to driver
+24/08/25 20:52:33 INFO Executor: Finished task 0.0 in stage 0.0 (TID 0). 1936 bytes result sent to driver
+24/08/25 20:52:33 INFO Executor: Finished task 5.0 in stage 0.0 (TID 5). 1936 bytes result sent to driver
+24/08/25 20:52:33 INFO PythonRunner: Times: total = 3557, boot = 2356, init = 1200, finish = 1
+24/08/25 20:52:33 INFO TaskSetManager: Finished task 3.0 in stage 0.0 (TID 3) in 4281 ms on 8ef98fa209cc (executor driver) (1/8)
+24/08/25 20:52:33 INFO Executor: Finished task 1.0 in stage 0.0 (TID 1). 1936 bytes result sent to driver
+24/08/25 20:52:33 INFO TaskSetManager: Finished task 4.0 in stage 0.0 (TID 4) in 4304 ms on 8ef98fa209cc (executor driver) (2/8)
+24/08/25 20:52:33 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 4371 ms on 8ef98fa209cc (executor driver) (3/8)
+24/08/25 20:52:33 INFO TaskSetManager: Finished task 5.0 in stage 0.0 (TID 5) in 4304 ms on 8ef98fa209cc (executor driver) (4/8)
+24/08/25 20:52:33 INFO TaskSetManager: Finished task 2.0 in stage 0.0 (TID 2) in 4317 ms on 8ef98fa209cc (executor driver) (5/8)
+24/08/25 20:52:33 INFO PythonRunner: Times: total = 3519, boot = 2398, init = 1120, finish = 1
+24/08/25 20:52:33 INFO TaskSetManager: Finished task 6.0 in stage 0.0 (TID 6) in 4317 ms on 8ef98fa209cc (executor driver) (6/8)
+24/08/25 20:52:33 INFO TaskSetManager: Finished task 1.0 in stage 0.0 (TID 1) in 4335 ms on 8ef98fa209cc (executor driver) (7/8)
+24/08/25 20:52:33 INFO Executor: Finished task 7.0 in stage 0.0 (TID 7). 2716 bytes result sent to driver
+24/08/25 20:52:33 INFO PythonAccumulatorV2: Connected to AccumulatorServer at host: 127.0.0.1 port: 52921
+24/08/25 20:52:33 INFO TaskSetManager: Finished task 7.0 in stage 0.0 (TID 7) in 4349 ms on 8ef98fa209cc (executor driver) (8/8)
+24/08/25 20:52:33 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+24/08/25 20:52:33 INFO DAGScheduler: ResultStage 0 (json at NativeMethodAccessorImpl.java:0) finished in 5.187 s
+24/08/25 20:52:33 INFO DAGScheduler: Job 0 is finished. Cancelling potential speculative or zombie tasks for this job
+24/08/25 20:52:33 INFO TaskSchedulerImpl: Killing all running tasks in stage 0: Stage finished
+24/08/25 20:52:33 INFO DAGScheduler: Job 0 finished: json at NativeMethodAccessorImpl.java:0, took 5.362352 s
 INFO:py4j.java_gateway:Callback Server Starting
-INFO:py4j.java_gateway:Socket listening on ('127.0.0.1', 46245)
-24/08/25 18:47:44 INFO StateStoreCoordinatorRef: Registered StateStoreCoordinator endpoint
-24/08/25 18:47:44 WARN ResolveWriteToStream: Temporary checkpoint location created which is deleted normally when the query didn't fail: /tmp/temporary-59555544-decb-446c-8815-d79763a75951. If it's required to delete it under any circumstances, please set spark.sql.streaming.forceDeleteTempCheckpointLocation to true. Important to know deleting temp checkpoint folder is best effort.
-24/08/25 18:47:44 INFO ResolveWriteToStream: Checkpoint root file:///tmp/temporary-59555544-decb-446c-8815-d79763a75951 resolved to file:/tmp/temporary-59555544-decb-446c-8815-d79763a75951.
-24/08/25 18:47:44 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
-24/08/25 18:47:44 INFO CheckpointFileManager: Writing atomically to file:/tmp/temporary-59555544-decb-446c-8815-d79763a75951/metadata using temp file file:/tmp/temporary-59555544-decb-446c-8815-d79763a75951/.metadata.9b9fcc76-606e-455d-b1d2-2613d25fd03d.tmp
-24/08/25 18:47:45 INFO CheckpointFileManager: Renamed temp file file:/tmp/temporary-59555544-decb-446c-8815-d79763a75951/.metadata.9b9fcc76-606e-455d-b1d2-2613d25fd03d.tmp to file:/tmp/temporary-59555544-decb-446c-8815-d79763a75951/metadata
-24/08/25 18:47:45 INFO MicroBatchExecution: Starting [id = 1fcbf7b6-64c9-45e4-afcf-0272036e6e81, runId = 0b7d2388-eee8-46c7-acae-8cb2542076d2]. Use file:/tmp/temporary-59555544-decb-446c-8815-d79763a75951 to store the query checkpoint.
-24/08/25 18:47:45 INFO MicroBatchExecution: Reading table [org.apache.spark.sql.kafka010.KafkaSourceProvider$KafkaTable@3ba34a61] from DataSourceV2 named 'kafka' [org.apache.spark.sql.kafka010.KafkaSourceProvider@6ff7499]
-24/08/25 18:47:45 INFO OffsetSeqLog: BatchIds found from listing: 
-24/08/25 18:47:45 INFO OffsetSeqLog: BatchIds found from listing: 
-24/08/25 18:47:45 INFO MicroBatchExecution: Starting new streaming query.
-24/08/25 18:47:45 INFO MicroBatchExecution: Stream started from {}
-24/08/25 18:47:46 INFO AdminClientConfig: AdminClientConfig values: 
+INFO:py4j.java_gateway:Socket listening on ('127.0.0.1', 34299)
+24/08/25 20:52:34 INFO StateStoreCoordinatorRef: Registered StateStoreCoordinator endpoint
+24/08/25 20:52:34 WARN ResolveWriteToStream: Temporary checkpoint location created which is deleted normally when the query didn't fail: /tmp/temporary-d5544bc3-2d70-4e62-a908-6946c745f073. If it's required to delete it under any circumstances, please set spark.sql.streaming.forceDeleteTempCheckpointLocation to true. Important to know deleting temp checkpoint folder is best effort.
+24/08/25 20:52:34 INFO ResolveWriteToStream: Checkpoint root file:///tmp/temporary-d5544bc3-2d70-4e62-a908-6946c745f073 resolved to file:/tmp/temporary-d5544bc3-2d70-4e62-a908-6946c745f073.
+24/08/25 20:52:34 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+24/08/25 20:52:35 INFO CheckpointFileManager: Writing atomically to file:/tmp/temporary-d5544bc3-2d70-4e62-a908-6946c745f073/metadata using temp file file:/tmp/temporary-d5544bc3-2d70-4e62-a908-6946c745f073/.metadata.54bceb30-05a2-420c-b76c-1b2ac3143c47.tmp
+24/08/25 20:52:35 INFO CheckpointFileManager: Renamed temp file file:/tmp/temporary-d5544bc3-2d70-4e62-a908-6946c745f073/.metadata.54bceb30-05a2-420c-b76c-1b2ac3143c47.tmp to file:/tmp/temporary-d5544bc3-2d70-4e62-a908-6946c745f073/metadata
+24/08/25 20:52:35 INFO MicroBatchExecution: Starting [id = 92810e3c-5257-45d9-9e8a-10b4006ae532, runId = 40ff6c75-883f-4214-b09a-045119f11a66]. Use file:/tmp/temporary-d5544bc3-2d70-4e62-a908-6946c745f073 to store the query checkpoint.
+24/08/25 20:52:35 INFO MicroBatchExecution: Reading table [org.apache.spark.sql.kafka010.KafkaSourceProvider$KafkaTable@5ef398cb] from DataSourceV2 named 'kafka' [org.apache.spark.sql.kafka010.KafkaSourceProvider@1b142470]
+24/08/25 20:52:35 INFO OffsetSeqLog: BatchIds found from listing: 
+24/08/25 20:52:35 INFO OffsetSeqLog: BatchIds found from listing: 
+24/08/25 20:52:35 INFO MicroBatchExecution: Starting new streaming query.
+24/08/25 20:52:35 INFO MicroBatchExecution: Stream started from {}
+24/08/25 20:52:35 INFO BlockManagerInfo: Removed broadcast_0_piece0 on 8ef98fa209cc:34879 in memory (size: 10.3 KiB, free: 434.4 MiB)
+24/08/25 20:52:36 INFO AdminClientConfig: AdminClientConfig values: 
 	bootstrap.servers = [kafka:9092]
 	client.dns.lookup = use_all_dns_ips
 	client.id = 
@@ -169,16 +170,15 @@ INFO:py4j.java_gateway:Socket listening on ('127.0.0.1', 46245)
 	ssl.truststore.password = null
 	ssl.truststore.type = JKS
 
-24/08/25 18:47:46 WARN AdminClientConfig: The configuration 'key.deserializer' was supplied but isn't a known config.
-24/08/25 18:47:46 WARN AdminClientConfig: The configuration 'value.deserializer' was supplied but isn't a known config.
-24/08/25 18:47:46 WARN AdminClientConfig: The configuration 'enable.auto.commit' was supplied but isn't a known config.
-24/08/25 18:47:46 WARN AdminClientConfig: The configuration 'max.poll.records' was supplied but isn't a known config.
-24/08/25 18:47:46 WARN AdminClientConfig: The configuration 'auto.offset.reset' was supplied but isn't a known config.
-24/08/25 18:47:46 INFO AppInfoParser: Kafka version: 2.8.1
-24/08/25 18:47:46 INFO AppInfoParser: Kafka commitId: 839b886f9b732b15
-24/08/25 18:47:46 INFO AppInfoParser: Kafka startTimeMs: 1724611666702
-24/08/25 18:47:46 INFO BlockManagerInfo: Removed broadcast_0_piece0 on 4e8655b07bf1:45925 in memory (size: 10.2 KiB, free: 434.4 MiB)
-24/08/25 18:47:48 WARN KafkaOffsetReaderAdmin: Error in attempt 1 getting Kafka offsets: 
+24/08/25 20:52:36 WARN AdminClientConfig: The configuration 'key.deserializer' was supplied but isn't a known config.
+24/08/25 20:52:36 WARN AdminClientConfig: The configuration 'value.deserializer' was supplied but isn't a known config.
+24/08/25 20:52:36 WARN AdminClientConfig: The configuration 'enable.auto.commit' was supplied but isn't a known config.
+24/08/25 20:52:36 WARN AdminClientConfig: The configuration 'max.poll.records' was supplied but isn't a known config.
+24/08/25 20:52:36 WARN AdminClientConfig: The configuration 'auto.offset.reset' was supplied but isn't a known config.
+24/08/25 20:52:36 INFO AppInfoParser: Kafka version: 2.8.1
+24/08/25 20:52:36 INFO AppInfoParser: Kafka commitId: 839b886f9b732b15
+24/08/25 20:52:36 INFO AppInfoParser: Kafka startTimeMs: 1724619156564
+24/08/25 20:52:37 WARN KafkaOffsetReaderAdmin: Error in attempt 1 getting Kafka offsets: 
 java.util.concurrent.ExecutionException: org.apache.kafka.common.errors.UnknownTopicOrPartitionException: This server does not host this topic-partition.
 	at org.apache.kafka.common.internals.KafkaFutureImpl.wrapAndThrow(KafkaFutureImpl.java:45)
 	at org.apache.kafka.common.internals.KafkaFutureImpl.access$000(KafkaFutureImpl.java:32)
@@ -235,11 +235,11 @@ java.util.concurrent.ExecutionException: org.apache.kafka.common.errors.UnknownT
 	at org.apache.spark.JobArtifactSet$.withActiveJobArtifactState(JobArtifactSet.scala:94)
 	at org.apache.spark.sql.execution.streaming.StreamExecution$$anon$1.run(StreamExecution.scala:211)
 Caused by: org.apache.kafka.common.errors.UnknownTopicOrPartitionException: This server does not host this topic-partition.
-24/08/25 18:47:49 INFO AppInfoParser: App info kafka.admin.client for adminclient-1 unregistered
-24/08/25 18:47:49 INFO Metrics: Metrics scheduler closed
-24/08/25 18:47:49 INFO Metrics: Closing reporter org.apache.kafka.common.metrics.JmxReporter
-24/08/25 18:47:49 INFO Metrics: Metrics reporters closed
-24/08/25 18:47:49 INFO AdminClientConfig: AdminClientConfig values: 
+24/08/25 20:52:38 INFO AppInfoParser: App info kafka.admin.client for adminclient-1 unregistered
+24/08/25 20:52:39 INFO Metrics: Metrics scheduler closed
+24/08/25 20:52:39 INFO Metrics: Closing reporter org.apache.kafka.common.metrics.JmxReporter
+24/08/25 20:52:39 INFO Metrics: Metrics reporters closed
+24/08/25 20:52:39 INFO AdminClientConfig: AdminClientConfig values: 
 	bootstrap.servers = [kafka:9092]
 	client.dns.lookup = use_all_dns_ips
 	client.id = 
@@ -295,15 +295,15 @@ Caused by: org.apache.kafka.common.errors.UnknownTopicOrPartitionException: This
 	ssl.truststore.password = null
 	ssl.truststore.type = JKS
 
-24/08/25 18:47:49 WARN AdminClientConfig: The configuration 'key.deserializer' was supplied but isn't a known config.
-24/08/25 18:47:49 WARN AdminClientConfig: The configuration 'value.deserializer' was supplied but isn't a known config.
-24/08/25 18:47:49 WARN AdminClientConfig: The configuration 'enable.auto.commit' was supplied but isn't a known config.
-24/08/25 18:47:49 WARN AdminClientConfig: The configuration 'max.poll.records' was supplied but isn't a known config.
-24/08/25 18:47:49 WARN AdminClientConfig: The configuration 'auto.offset.reset' was supplied but isn't a known config.
-24/08/25 18:47:49 INFO AppInfoParser: Kafka version: 2.8.1
-24/08/25 18:47:49 INFO AppInfoParser: Kafka commitId: 839b886f9b732b15
-24/08/25 18:47:49 INFO AppInfoParser: Kafka startTimeMs: 1724611669645
-24/08/25 18:47:49 WARN KafkaOffsetReaderAdmin: Error in attempt 2 getting Kafka offsets: 
+24/08/25 20:52:39 WARN AdminClientConfig: The configuration 'key.deserializer' was supplied but isn't a known config.
+24/08/25 20:52:39 WARN AdminClientConfig: The configuration 'value.deserializer' was supplied but isn't a known config.
+24/08/25 20:52:39 WARN AdminClientConfig: The configuration 'enable.auto.commit' was supplied but isn't a known config.
+24/08/25 20:52:39 WARN AdminClientConfig: The configuration 'max.poll.records' was supplied but isn't a known config.
+24/08/25 20:52:39 WARN AdminClientConfig: The configuration 'auto.offset.reset' was supplied but isn't a known config.
+24/08/25 20:52:39 INFO AppInfoParser: Kafka version: 2.8.1
+24/08/25 20:52:39 INFO AppInfoParser: Kafka commitId: 839b886f9b732b15
+24/08/25 20:52:39 INFO AppInfoParser: Kafka startTimeMs: 1724619159056
+24/08/25 20:52:39 WARN KafkaOffsetReaderAdmin: Error in attempt 2 getting Kafka offsets: 
 java.util.concurrent.ExecutionException: org.apache.kafka.common.errors.UnknownTopicOrPartitionException: This server does not host this topic-partition.
 	at org.apache.kafka.common.internals.KafkaFutureImpl.wrapAndThrow(KafkaFutureImpl.java:45)
 	at org.apache.kafka.common.internals.KafkaFutureImpl.access$000(KafkaFutureImpl.java:32)
@@ -360,11 +360,11 @@ java.util.concurrent.ExecutionException: org.apache.kafka.common.errors.UnknownT
 	at org.apache.spark.JobArtifactSet$.withActiveJobArtifactState(JobArtifactSet.scala:94)
 	at org.apache.spark.sql.execution.streaming.StreamExecution$$anon$1.run(StreamExecution.scala:211)
 Caused by: org.apache.kafka.common.errors.UnknownTopicOrPartitionException: This server does not host this topic-partition.
-24/08/25 18:47:50 INFO AppInfoParser: App info kafka.admin.client for adminclient-2 unregistered
-24/08/25 18:47:50 INFO Metrics: Metrics scheduler closed
-24/08/25 18:47:50 INFO Metrics: Closing reporter org.apache.kafka.common.metrics.JmxReporter
-24/08/25 18:47:50 INFO Metrics: Metrics reporters closed
-24/08/25 18:47:50 INFO AdminClientConfig: AdminClientConfig values: 
+24/08/25 20:52:40 INFO AppInfoParser: App info kafka.admin.client for adminclient-2 unregistered
+24/08/25 20:52:40 INFO Metrics: Metrics scheduler closed
+24/08/25 20:52:40 INFO Metrics: Closing reporter org.apache.kafka.common.metrics.JmxReporter
+24/08/25 20:52:40 INFO Metrics: Metrics reporters closed
+24/08/25 20:52:40 INFO AdminClientConfig: AdminClientConfig values: 
 	bootstrap.servers = [kafka:9092]
 	client.dns.lookup = use_all_dns_ips
 	client.id = 
@@ -420,15 +420,15 @@ Caused by: org.apache.kafka.common.errors.UnknownTopicOrPartitionException: This
 	ssl.truststore.password = null
 	ssl.truststore.type = JKS
 
-24/08/25 18:47:50 WARN AdminClientConfig: The configuration 'key.deserializer' was supplied but isn't a known config.
-24/08/25 18:47:50 WARN AdminClientConfig: The configuration 'value.deserializer' was supplied but isn't a known config.
-24/08/25 18:47:50 WARN AdminClientConfig: The configuration 'enable.auto.commit' was supplied but isn't a known config.
-24/08/25 18:47:50 WARN AdminClientConfig: The configuration 'max.poll.records' was supplied but isn't a known config.
-24/08/25 18:47:50 WARN AdminClientConfig: The configuration 'auto.offset.reset' was supplied but isn't a known config.
-24/08/25 18:47:50 INFO AppInfoParser: Kafka version: 2.8.1
-24/08/25 18:47:50 INFO AppInfoParser: Kafka commitId: 839b886f9b732b15
-24/08/25 18:47:50 INFO AppInfoParser: Kafka startTimeMs: 1724611670759
-24/08/25 18:47:50 WARN KafkaOffsetReaderAdmin: Error in attempt 3 getting Kafka offsets: 
+24/08/25 20:52:40 WARN AdminClientConfig: The configuration 'key.deserializer' was supplied but isn't a known config.
+24/08/25 20:52:40 WARN AdminClientConfig: The configuration 'value.deserializer' was supplied but isn't a known config.
+24/08/25 20:52:40 WARN AdminClientConfig: The configuration 'enable.auto.commit' was supplied but isn't a known config.
+24/08/25 20:52:40 WARN AdminClientConfig: The configuration 'max.poll.records' was supplied but isn't a known config.
+24/08/25 20:52:40 WARN AdminClientConfig: The configuration 'auto.offset.reset' was supplied but isn't a known config.
+24/08/25 20:52:40 INFO AppInfoParser: Kafka version: 2.8.1
+24/08/25 20:52:40 INFO AppInfoParser: Kafka commitId: 839b886f9b732b15
+24/08/25 20:52:40 INFO AppInfoParser: Kafka startTimeMs: 1724619160149
+24/08/25 20:52:40 WARN KafkaOffsetReaderAdmin: Error in attempt 3 getting Kafka offsets: 
 java.util.concurrent.ExecutionException: org.apache.kafka.common.errors.UnknownTopicOrPartitionException: This server does not host this topic-partition.
 	at org.apache.kafka.common.internals.KafkaFutureImpl.wrapAndThrow(KafkaFutureImpl.java:45)
 	at org.apache.kafka.common.internals.KafkaFutureImpl.access$000(KafkaFutureImpl.java:32)
@@ -485,11 +485,11 @@ java.util.concurrent.ExecutionException: org.apache.kafka.common.errors.UnknownT
 	at org.apache.spark.JobArtifactSet$.withActiveJobArtifactState(JobArtifactSet.scala:94)
 	at org.apache.spark.sql.execution.streaming.StreamExecution$$anon$1.run(StreamExecution.scala:211)
 Caused by: org.apache.kafka.common.errors.UnknownTopicOrPartitionException: This server does not host this topic-partition.
-24/08/25 18:47:51 INFO AppInfoParser: App info kafka.admin.client for adminclient-3 unregistered
-24/08/25 18:47:51 INFO Metrics: Metrics scheduler closed
-24/08/25 18:47:51 INFO Metrics: Closing reporter org.apache.kafka.common.metrics.JmxReporter
-24/08/25 18:47:51 INFO Metrics: Metrics reporters closed
-24/08/25 18:47:51 ERROR MicroBatchExecution: Query [id = 1fcbf7b6-64c9-45e4-afcf-0272036e6e81, runId = 0b7d2388-eee8-46c7-acae-8cb2542076d2] terminated with error
+24/08/25 20:52:41 INFO AppInfoParser: App info kafka.admin.client for adminclient-3 unregistered
+24/08/25 20:52:41 INFO Metrics: Metrics scheduler closed
+24/08/25 20:52:41 INFO Metrics: Closing reporter org.apache.kafka.common.metrics.JmxReporter
+24/08/25 20:52:41 INFO Metrics: Metrics reporters closed
+24/08/25 20:52:41 ERROR MicroBatchExecution: Query [id = 92810e3c-5257-45d9-9e8a-10b4006ae532, runId = 40ff6c75-883f-4214-b09a-045119f11a66] terminated with error
 java.util.concurrent.ExecutionException: org.apache.kafka.common.errors.UnknownTopicOrPartitionException: This server does not host this topic-partition.
 	at org.apache.kafka.common.internals.KafkaFutureImpl.wrapAndThrow(KafkaFutureImpl.java:45)
 	at org.apache.kafka.common.internals.KafkaFutureImpl.access$000(KafkaFutureImpl.java:32)
@@ -546,26 +546,26 @@ java.util.concurrent.ExecutionException: org.apache.kafka.common.errors.UnknownT
 	at org.apache.spark.JobArtifactSet$.withActiveJobArtifactState(JobArtifactSet.scala:94)
 	at org.apache.spark.sql.execution.streaming.StreamExecution$$anon$1.run(StreamExecution.scala:211)
 Caused by: org.apache.kafka.common.errors.UnknownTopicOrPartitionException: This server does not host this topic-partition.
-24/08/25 18:47:51 INFO MicroBatchExecution: Async log purge executor pool for query [id = 1fcbf7b6-64c9-45e4-afcf-0272036e6e81, runId = 0b7d2388-eee8-46c7-acae-8cb2542076d2] has been shutdown
+24/08/25 20:52:41 INFO MicroBatchExecution: Async log purge executor pool for query [id = 92810e3c-5257-45d9-9e8a-10b4006ae532, runId = 40ff6c75-883f-4214-b09a-045119f11a66] has been shutdown
 Traceback (most recent call last):
   File "/includes/ingestion/kafka/load-kafka-stream-transactions.py", line 54, in <module>
     query.awaitTermination()
   File "/opt/spark/python/lib/pyspark.zip/pyspark/sql/streaming/query.py", line 221, in awaitTermination
   File "/opt/spark/python/lib/py4j-0.10.9.7-src.zip/py4j/java_gateway.py", line 1322, in __call__
   File "/opt/spark/python/lib/pyspark.zip/pyspark/errors/exceptions/captured.py", line 185, in deco
-pyspark.errors.exceptions.captured.StreamingQueryException: [STREAM_FAILED] Query [id = 1fcbf7b6-64c9-45e4-afcf-0272036e6e81, runId = 0b7d2388-eee8-46c7-acae-8cb2542076d2] terminated with exception: org.apache.kafka.common.errors.UnknownTopicOrPartitionException: This server does not host this topic-partition.
+pyspark.errors.exceptions.captured.StreamingQueryException: [STREAM_FAILED] Query [id = 92810e3c-5257-45d9-9e8a-10b4006ae532, runId = 40ff6c75-883f-4214-b09a-045119f11a66] terminated with exception: org.apache.kafka.common.errors.UnknownTopicOrPartitionException: This server does not host this topic-partition.
 INFO:py4j.clientserver:Closing down clientserver connection
-24/08/25 18:47:52 INFO SparkContext: Invoking stop() from shutdown hook
-24/08/25 18:47:52 INFO SparkContext: SparkContext is stopping with exitCode 0.
-24/08/25 18:47:52 INFO SparkUI: Stopped Spark web UI at http://4e8655b07bf1:4040
-24/08/25 18:47:52 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
-24/08/25 18:47:52 INFO MemoryStore: MemoryStore cleared
-24/08/25 18:47:52 INFO BlockManager: BlockManager stopped
-24/08/25 18:47:52 INFO BlockManagerMaster: BlockManagerMaster stopped
-24/08/25 18:47:52 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
-24/08/25 18:47:52 INFO SparkContext: Successfully stopped SparkContext
-24/08/25 18:47:52 INFO ShutdownHookManager: Shutdown hook called
-24/08/25 18:47:52 INFO ShutdownHookManager: Deleting directory /tmp/temporary-59555544-decb-446c-8815-d79763a75951
-24/08/25 18:47:52 INFO ShutdownHookManager: Deleting directory /tmp/spark-d5e9d3f8-3551-4b20-b802-2b6163361f59
-24/08/25 18:47:52 INFO ShutdownHookManager: Deleting directory /tmp/spark-d5e9d3f8-3551-4b20-b802-2b6163361f59/pyspark-3d93023e-e67e-4f8a-9c2f-b38e84e10664
-24/08/25 18:47:52 INFO ShutdownHookManager: Deleting directory /tmp/spark-6c8cfc9c-6cb9-4cc0-a477-41da0313bec7
+24/08/25 20:52:41 INFO SparkContext: Invoking stop() from shutdown hook
+24/08/25 20:52:41 INFO SparkContext: SparkContext is stopping with exitCode 0.
+24/08/25 20:52:41 INFO SparkUI: Stopped Spark web UI at http://8ef98fa209cc:4040
+24/08/25 20:52:41 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+24/08/25 20:52:41 INFO MemoryStore: MemoryStore cleared
+24/08/25 20:52:41 INFO BlockManager: BlockManager stopped
+24/08/25 20:52:41 INFO BlockManagerMaster: BlockManagerMaster stopped
+24/08/25 20:52:41 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+24/08/25 20:52:41 INFO SparkContext: Successfully stopped SparkContext
+24/08/25 20:52:41 INFO ShutdownHookManager: Shutdown hook called
+24/08/25 20:52:41 INFO ShutdownHookManager: Deleting directory /tmp/temporary-d5544bc3-2d70-4e62-a908-6946c745f073
+24/08/25 20:52:41 INFO ShutdownHookManager: Deleting directory /tmp/spark-294acb29-17cb-48d0-80fd-62fbdaf4210f
+24/08/25 20:52:41 INFO ShutdownHookManager: Deleting directory /tmp/spark-67f7a4e8-5fbd-4e39-bd3b-278abd74a879
+24/08/25 20:52:41 INFO ShutdownHookManager: Deleting directory /tmp/spark-67f7a4e8-5fbd-4e39-bd3b-278abd74a879/pyspark-6915e148-bb57-436c-a6f1-9906b7fa0328

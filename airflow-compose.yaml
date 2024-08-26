@@ -27,6 +27,7 @@
 #                                Default: apache/airflow:2.8.0
 # AIRFLOW_UID                  - User ID in Airflow containers
 #                                Default: 50000
+#                                changed 50000 to my local user ak
 # AIRFLOW_PROJ_DIR             - Base path to which all the files will be volumed.
 #                                Default: .
 # Those configurations are useful mostly in case of standalone testing/running Airflow in test/try-out mode
@@ -83,6 +84,7 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     - ${AIRFLOW_PROJ_DIR:-.}/db:/opt/airflow/db
   user: "${AIRFLOW_UID:-50000}:0"
+  #user: "${AIRFLOW_UID:-ak}:0"
 
 networks:
   airflow-network:
